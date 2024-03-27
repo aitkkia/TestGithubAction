@@ -36,9 +36,9 @@ jobs:
 
     - name: Archive Executable
       run: |
-        mkdir artifacts
-        cp AppMain/bin/Release/* artifacts/
-        zip -r artifacts.zip artifacts
+        New-Item -ItemType Directory -Path artifacts
+        Copy-Item -Path AppMain/bin/Release/* -Destination artifacts/ -Recurse
+        Compress-Archive -Path artifacts -DestinationPath artifacts.zip -Force
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
